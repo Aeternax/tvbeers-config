@@ -1,0 +1,38 @@
+server {
+    listen 80;  #could also be 1.2.3.4:80
+
+    # adjust this as required
+    server_name tvbeers.com, www.tvbeers.com;
+
+    root /var/www/html/textpattern;
+
+    error_page 404 /usr/share/nginx/errors/404.html;
+    access_log /var/log/nginx/tvbeers.com.access.log main;
+
+    index index.php index.html index.htm;
+
+    # the following line is responsible for clean URLs
+    try_files $uri $uri/ /index.php?$args;
+
+    # serve static files directly
+
+    location ~* \.(jpg|jpeg|gif|css|png|js|ico|html)$ {
+        access_log off;
+        expires max;
+    }
+
+    location ~ \.php$ {
+        # Security: must set cgi.fixpathinfo to 0 in php.ini!
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME         $document_root$fastcgi_script_name;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+        include /etc/nginx/fastcgi_params;
+    }
+
+    location ~ /\.ht {
+        deny  all;
+    }
+}
+

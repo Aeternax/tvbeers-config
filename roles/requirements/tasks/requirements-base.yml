@@ -1,0 +1,40 @@
+---
+#- name: Set up user and requirements
+#  hosts: tvbeers
+#  become: true
+#  remote_user: ansible
+
+- name: Add epel-release repo
+  yum:
+    name: epel-release
+    state: present
+
+- name: Ensure nginx is installed
+  yum:
+    name: nginx
+    state: present
+
+- name: Ensure nginx is running
+  service:
+    name: nginx
+    state: started
+
+- name: Ensure php-fpm is installed
+  yum:
+    name: php-fpm
+    state: present
+
+- name: Ensure php-fpm is running
+  service:
+    name: php-fpm
+    state: started
+
+- name: Template nginx vhost
+  template:
+    src: "{{ tvbeers_nginx_vhost_src }}"
+    dest: "/etc/nginx/conf.d/tvbeers-nginx-vhost.conf" 
+    owner: root
+    group: root
+    mode: 0644
+  register: nginx-vhost
+  notify: restart nginx

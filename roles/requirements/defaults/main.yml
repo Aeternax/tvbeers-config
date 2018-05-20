@@ -1,0 +1,3 @@
+---
+tvbeers_nginx_vhost_src: "tvbeers-nginx-vhost.conf.j2"
+tvbeers_nginx_vhost_dest: "/etc/nginx/conf.d/tvbeers-nginx-vhost.conf"
