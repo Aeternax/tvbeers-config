@@ -1,0 +1,14 @@
+---
+- name: Ensure https port is open
+  firewalld:
+    port: 443/tcp
+    permanent: true
+    immediate: yes
+    state: enabled
+
+- name: ensure http port is open
+  firewalld:
+    port: 80/tcp
+    permanent: true
+    immediate: yes
+    state: enabled

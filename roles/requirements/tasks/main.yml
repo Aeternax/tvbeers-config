@@ -1,2 +1,3 @@
 ---
   - include: requirements-base.yml
+  - include: firewall.yml
