@@ -1,3 +1,8 @@
+[all:vars]
+#ansible_connection=ssh # actually default mode smart is OK
+ansible_user=ansible
+ansible_pass=M@rc0@rt$1988
+
 [tvbeers]
 tvbeers.com
 

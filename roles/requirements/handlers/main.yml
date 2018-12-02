@@ -3,4 +3,5 @@
     service:
       name: nginx
       state: restarted
-    when: nginx-vhost.changed
+    when:
+      - not ansible_check_mode
