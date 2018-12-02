@@ -1,0 +1,7 @@
+---
+
+- name: Ensure Wagtail is installed with latest version.
+  pip:
+    name: wagtail
+    virtualenv: "{{ wagtailvenv }}"
+
